@@ -1,0 +1,129 @@
+* {
+    font-family: 'Roboto';
+    color: #7C7C7D;
+    font-size: 18px;
+}
+
+/* fallback */
+@font-face {
+    font-family: 'Material Icons';
+    font-style: normal;
+    font-weight: 400;
+    src: url(https://fonts.gstatic.com/s/materialicons/v31/2fcrYFNaTjcS6g4U3t-Y5ZjZjT5FdEJ140U2DJYC3mY.woff2) format('woff2');
+}
+  
+.material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-feature-settings: 'liga';
+    -webkit-font-smoothing: antialiased;
+}
+
+.content-padding {
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 58px !important;
+}
+
+.parent-width {
+    position: absolute;
+    width: 100%;
+    left: 0%;
+    margin-bottom: 30px;
+}
+
+.mobile-fab-tip {
+    position: fixed;
+    right: 85px;
+    padding:0px 0.5rem;
+    text-align: right;
+    background-color: #323232;
+    border-radius: 2px;
+    color: #FFF;
+    width:auto;
+} 
+
+.waves-effect.waves-primary .waves-ripple {
+    background-color: #007bff !important;
+}
+
+.collapsible-header {
+    padding: 0 32px !important;
+}
+
+.primary {
+    background-color: #007bff !important;
+}
+
+.secondary {
+    background-color: #7C7C7D !important;
+}
+
+.dropdown-bg {
+    background-color: #ddd !important;
+}
+
+.large-text {
+    font-size: 2rem !important;
+}
+
+.big-text {
+    font-size: 1.3rem !important;
+}
+
+.medium-text {
+    font-size: 1.1rem !important;
+}
+
+.small-text {
+    font-size: .9rem !important;
+}
+
+.modal-footer {
+    z-index: 2000;
+}
+
+.parent-width {
+    width: 100% !important;
+}
+
+.row.remove-after-row::after, .row.remove-after-row {
+    content: none !important;
+}
+
+.brand-logo {
+    font-size: 1.8rem !important;
+}
+
+.parent-width {
+    position: absolute;
+    width: 100%;
+    left: 0%;
+    margin-bottom: 30px;
+}
+
+.fullscreen-modal {
+    top: 0% !important;
+    height: 100% !important;
+    width: 100%;
+    max-height: 100%;
+}
+
+.modal-header {
+    height: 42px;
+    font-size: 1.5rem;
+    line-height: 2;
+    background-color: #007bff;
+    color: white;  
+    padding-left: 5px; 
+    padding-right: 5px; 
+}
