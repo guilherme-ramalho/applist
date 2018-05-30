@@ -5,7 +5,34 @@ var app = {
     },
 
     loadItemList: function () {
+        let itemList = localStorage.itemList;
 
+        //Creates the list item element if It is defined
+        if (typeof itemList != 'undefined') {
+            let str = '';
+            itemList = JSON.parse(itemList);
+
+            $.each(itemList, function (key, item) {
+                console.log(item);
+                str +=
+                '<li id="aposta236015" class="collection-item">\
+                    <p>\
+                        <div class="sol s12">\
+                            <b class="medium-text">Tipo:</b>\
+                            <span class="medium-text">'+item.tipo+'</span>\
+                            <div class="right">\
+                                <b class="medium-text">Criado:</b>\
+                                <span class="medium-text">'+item.createdAt+'</span>\
+                            </div>\
+                        </div>\
+                    </p>\
+                </li>';
+            });
+
+            $('#itemList').removeAttr('hidden').html(str);
+        } else {
+            $('#content').html('<p>Nenhum item cadastrado. Clique no botão "+" para cadastrar um novo item.</p>');
+        }
     },
 
     openModal: function () {
@@ -49,18 +76,22 @@ var app = {
 
     storeItem: function (item) {
         let itemList = localStorage.itemList;
+        let currentDateTime = moment().locale('pt-br').format('DD/MM/YYYY H:mm');
 
-        if( typeof itemList == 'undefined' ) {
-            let itemObj = {
-                item
-            }
+        item.createdAt = currentDateTime
+
+        if (typeof itemList == 'undefined') {//Local storage isn't defined yet
+            let itemObj = [item];
 
             localStorage.setItem('itemList', JSON.stringify(itemObj));
-        } else {
+        } else {//Pushes the item into an existing storage list
             itemList = JSON.parse(itemList);
+            console.log(itemList);
             itemList.push(item);
             itemList = JSON.stringify(itemList);
             localStorage.itemList = itemList;
         }
+
+        location.reload();
     }
 }

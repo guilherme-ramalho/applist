@@ -20,32 +20,7 @@
         <div class="col s12 content-padding">
 
             <div id="content">
-                <ul id="itemList" class="collection">
-                    <li id="aposta236015" class="collection-item">
-                        <p>
-                            <div class="sol s12">
-                                <b class="medium-text">Tipo:</b>
-                                <span class="medium-text">Notebook</span>
-
-                                <div class="right">
-                                    <b class="medium-text">Valor:</b>
-                                    <span class="medium-text">R$ 15,00</span>
-                                </div>
-                            </div>
-                        </p>
-                        <p>
-                            <div class="sol s12">
-                                <b class="medium-text">Código:</b>
-                                <span class="medium-text">42C5DE81BC5A5</span>
-
-                                <div class="right">
-                                    <b class="medium-text">Data:</b>
-                                    <span class="medium-text">25/10 15:30</span>
-                                </div>
-                            </div>
-                        </p>
-                    </li>
-                </ul>
+                <ul id="itemList" class="collection" hidden></ul>
             </div>
 
             <div id="footer">
@@ -78,28 +53,27 @@
                                             <option value="Mouse">Mouse</option>
                                             <option value="Leitor Cód. de Barras">Leitor Cód. de Barras</option>
                                         </select>
-                                        <div class="input-field col s6">
-                                            <input id="patrimonio" type="text" class="validate">
-                                            <label for="patrimonio">Patrimônio</label>
-                                        </div>
-                                        <div class="input-field col s6">
-                                            <input id="marca" type="text" class="validate">
-                                            <label for="marca">Marca</label>
-                                        </div>
-                                        <div class="input-field col s6">
-                                            <input id="modeloPn" type="text" class="validate">
-                                            <label for="modeloPn">Modelo/PN</label>
-                                        </div>
-                                        <div class="input-field col s6">
-                                            <input id="serial" type="text" class="validate">
-                                            <label for="serial">Serial</label>
-                                        </div>
-                                        <div class="input-field col s6">
-                                            <input id="serialHd" type="text" class="validate">
-                                            <label for="serialHd">Serial HD</label>
-                                        </div>
                                     </div>
-
+                                    <div class="input-field col s6">
+                                        <input id="patrimonio" type="text" class="validate">
+                                        <label for="patrimonio">Patrimônio</label>
+                                    </div>
+                                    <div class="input-field col s6">
+                                        <input id="marca" type="text" class="validate">
+                                        <label for="marca">Marca</label>
+                                    </div>
+                                    <div class="input-field col s6">
+                                        <input id="modeloPn" type="text" class="validate">
+                                        <label for="modeloPn">Modelo/PN</label>
+                                    </div>
+                                    <div class="input-field col s6">
+                                        <input id="serial" type="text" class="validate">
+                                        <label for="serial">Serial</label>
+                                    </div>
+                                    <div class="input-field col s6">
+                                        <input id="serialHd" type="text" class="validate">
+                                        <label for="serialHd">Serial HD</label>
+                                    </div>
                                 </div>
                             </form>
                         </div>
@@ -120,9 +94,11 @@
     <script type="text/javascript" src="js/app.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript" src="materialize/js/materialize.js"></script>
+    <script type="text/javascript" src="moment/moment.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             app.loadBar();
+            app.loadItemList();
             $('select').material_select();
         });
     </script>
