@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Tue May 29 15:12:40 BRT 2018
+#Tue May 29 15:55:48 BRT 2018
 5.base=D\:\\Trabalho\\Desenvolvimento\\atlanteti\\applist\\platforms\\android\\app\\build\\intermediates\\assets\\debug
 42.base=D\:\\Trabalho\\Desenvolvimento\\atlanteti\\applist\\platforms\\android\\app\\build\\intermediates\\assets\\debug
 32.set=ANDROID_RESOURCE
