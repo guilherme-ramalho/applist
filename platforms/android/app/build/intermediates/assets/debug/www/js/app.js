@@ -7,6 +7,7 @@ var app = {
     loadItemList: function () {
         let itemList = localStorage.itemList;
 
+        //Creates the list item element if It is defined
         if (typeof itemList != 'undefined') {
             let str = '';
             itemList = JSON.parse(itemList);
@@ -20,8 +21,8 @@ var app = {
                             <b class="medium-text">Tipo:</b>\
                             <span class="medium-text">'+item.tipo+'</span>\
                             <div class="right">\
-                                <b class="medium-text">Valor:</b>\
-                                <span class="medium-text">...</span>\
+                                <b class="medium-text">Criado:</b>\
+                                <span class="medium-text">'+item.createdAt+'</span>\
                             </div>\
                         </div>\
                     </p>\
@@ -75,12 +76,15 @@ var app = {
 
     storeItem: function (item) {
         let itemList = localStorage.itemList;
+        let currentDateTime = moment().locale('pt-br').format('DD/MM/YYYY H:mm');
 
-        if (typeof itemList == 'undefined') {
+        item.createdAt = currentDateTime
+
+        if (typeof itemList == 'undefined') {//Local storage isn't defined yet
             let itemObj = [item];
 
             localStorage.setItem('itemList', JSON.stringify(itemObj));
-        } else {
+        } else {//Pushes the item into an existing storage list
             itemList = JSON.parse(itemList);
             console.log(itemList);
             itemList.push(item);
