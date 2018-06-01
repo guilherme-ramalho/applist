@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Wed May 30 15:07:54 BRT 2018
+#Wed May 30 16:40:39 BRT 2018
 17.baseType=DIRECTORY
 4.path=www/materialize/js/materialize.js
 25.base=/var/www/html/projetos/atlanteti/applist/platforms/android/app/build/intermediates/assets/debug

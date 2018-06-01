@@ -55,23 +55,23 @@
                                         </select>
                                     </div>
                                     <div class="input-field col s6">
-                                        <input id="patrimonio" type="text" class="validate">
+                                        <input id="patrimonio" name="patrimonio" type="text" class="validate">
                                         <label for="patrimonio">Patrimônio</label>
                                     </div>
                                     <div class="input-field col s6">
-                                        <input id="marca" type="text" class="validate">
+                                        <input id="marca" name="marca" type="text" class="validate">
                                         <label for="marca">Marca</label>
                                     </div>
                                     <div class="input-field col s6">
-                                        <input id="modeloPn" type="text" class="validate">
+                                        <input id="modeloPn" name="modeloPn" type="text" class="validate">
                                         <label for="modeloPn">Modelo/PN</label>
                                     </div>
                                     <div class="input-field col s6">
-                                        <input id="serial" type="text" class="validate">
+                                        <input id="serial" name="serial" type="text" class="validate">
                                         <label for="serial">Serial</label>
                                     </div>
                                     <div class="input-field col s6">
-                                        <input id="serialHd" type="text" class="validate">
+                                        <input id="serialHd" name="serialHd" type="text" class="validate">
                                         <label for="serialHd">Serial HD</label>
                                     </div>
                                 </div>
@@ -99,6 +99,7 @@
         $(document).ready(function () {
             app.loadBar();
             app.loadItemList();
+            app.selectListener();
             $('select').material_select();
         });
     </script>

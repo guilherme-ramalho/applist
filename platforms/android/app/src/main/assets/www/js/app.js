@@ -29,7 +29,7 @@ var app = {
                 </li>';
             });
 
-            $('#itemList').removeAttr('hidden').html(str);
+            $('#itemList').show().html(str);
         } else {
             $('#content').html('<p>Nenhum item cadastrado. Clique no botão "+" para cadastrar um novo item.</p>');
         }
@@ -48,20 +48,49 @@ var app = {
     },
 
     saveItem: function () {
-        if ($('#nome').val() == '') {
-            this.toast('Por favor, informe o nome para salvar o item.');
-
-            return false;
-        }
-
         let item = $('#itemForm').serializeArray();
         item = this.objectfyForm(item);
 
         this.storeItem(item);
     },
 
+    selectListener: function () {
+        $('#tipo').change(function() {
+            let tipo = $('#tipo').val();
+
+            let inputs = $('#itemForm>div.row>div.input-field');
+
+            inputs.each(function() {
+                $(this).show();
+            });
+
+            switch (tipo) {
+                //Impressora, A. Telefônico, Monitor
+                case 'Monitor':
+                case 'Impressora':
+                case 'Aparelho telefônico':
+                    $('#serialHd').closest('div').hide();
+                    break;
+                //Teclado, Leitor Cód. Barras
+                case 'Teclado':
+                case 'Leitor Cód. de Barras':
+                    $('#serialHd').closest('div').hide();
+                    $('#modeloPn').closest('div').hide();
+                    break;
+                //Mouse
+                case 'Mouse':
+                    $('#serialHd').closest('div').hide();
+                    $('#modeloPn').closest('div').hide();
+                    $('#serial').closest('div').hide();
+                    break;
+                default:
+                    //do somethin'
+            }
+        });
+    },
+
     toast: function (msg) {
-        Materialize.toast(msg, 4000)
+        Materialize.toast(msg, 4000);
     },
 
     objectfyForm: function (formArray) {

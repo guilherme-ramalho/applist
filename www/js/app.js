@@ -66,19 +66,19 @@ var app = {
 
             switch (tipo) {
                 //Impressora, A. Telefônico, Monitor
-                case '3':
-                case '4':
-                case '5':
+                case 'Monitor':
+                case 'Impressora':
+                case 'Aparelho telefônico':
                     $('#serialHd').closest('div').hide();
                     break;
                 //Teclado, Leitor Cód. Barras
-                case '6':
-                case '8':
+                case 'Teclado':
+                case 'Leitor Cód. de Barras':
                     $('#serialHd').closest('div').hide();
                     $('#modeloPn').closest('div').hide();
                     break;
                 //Mouse
-                case '7':
+                case 'Mouse':
                     $('#serialHd').closest('div').hide();
                     $('#modeloPn').closest('div').hide();
                     $('#serial').closest('div').hide();
