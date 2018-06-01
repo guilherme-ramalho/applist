@@ -6,32 +6,37 @@ var app = {
 
     loadItemList: function () {
         let itemList = localStorage.itemList;
+        let content = $('#content');
+
+        content.empty();
 
         //Creates the list item element if It is defined
         if (typeof itemList != 'undefined') {
             let str = '';
             itemList = JSON.parse(itemList);
 
+            content.html('<ul id="itemList" class="collection"></ul>');
+
             $.each(itemList, function (key, item) {
                 console.log(item);
                 str +=
-                '<li id="aposta236015" class="collection-item">\
+                    '<li id="item' + key + '" class="collection-item">\
                     <p>\
                         <div class="sol s12">\
                             <b class="medium-text">Tipo:</b>\
-                            <span class="medium-text">'+item.tipo+'</span>\
+                            <span class="medium-text">'+ item.tipo + '</span>\
                             <div class="right">\
                                 <b class="medium-text">Criado:</b>\
-                                <span class="medium-text">'+item.createdAt+'</span>\
+                                <span class="medium-text">'+ item.createdAt + '</span>\
                             </div>\
                         </div>\
                     </p>\
                 </li>';
             });
 
-            $('#itemList').show().html(str);
+            $('#itemList').html(str);
         } else {
-            $('#content').html('<p>Nenhum item cadastrado. Clique no botão "+" para cadastrar um novo item.</p>');
+            content.html('<p>Nenhum item cadastrado. Clique no botão "+" para cadastrar um novo item.</p>');
         }
     },
 
@@ -43,6 +48,8 @@ var app = {
     },
 
     closeModal: function () {
+        $('#itemForm').trigger('reset');
+
         $('#addItemModal').modal();
         $('#addItemModal').modal('close');
     },
@@ -55,12 +62,12 @@ var app = {
     },
 
     selectListener: function () {
-        $('#tipo').change(function() {
+        $('#tipo').change(function () {
             let tipo = $('#tipo').val();
 
             let inputs = $('#itemForm>div.row>div.input-field');
 
-            inputs.each(function() {
+            inputs.each(function () {
                 $(this).show();
             });
 
@@ -84,7 +91,7 @@ var app = {
                     $('#serial').closest('div').hide();
                     break;
                 default:
-                    //do somethin'
+                //do somethin'
             }
         });
     },
@@ -121,6 +128,7 @@ var app = {
             localStorage.itemList = itemList;
         }
 
-        location.reload();
+        this.closeModal();
+        this.loadItemList();
     }
 }

@@ -9,7 +9,7 @@
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
     <link rel="stylesheet" type="text/css" href="materialize/css/materialize.css">
     <link rel="stylesheet" type="text/css" href="css/index.css">
-    <title>App List</title>
+    <title>Atlante Inventário</title>
 </head>
 
 <body>
@@ -18,19 +18,45 @@
             <div id="navbar" class="parent-width"></div>
         </div>
         <div class="col s12 content-padding">
+            <!-- Content -->
+            <div id="content"></div>
 
-            <div id="content">
-                <ul id="itemList" class="collection" hidden></ul>
+            <!-- FAB -->
+            <div class="fixed-action-btn click-to-toggle" style="bottom:24px; right:24px;">
+                <a class="btn-floating btn-large primary">
+                    <i class="large material-icons">menu</i>
+                </a>
+                <ul>
+                    <li>
+                        <a href="#!" onclick="app.openModal()" class="btn-floating primary">
+                            <i class="material-icons">add</i>
+                        </a>
+                        <a href="#!" onclick="app.openModal()" class="btn-floating mobile-fab-tip">Cadastrar</a>
+                    </li>
+                    <li>
+                        <a href="#!" onclick="compartilharComprovante()" class="btn-floating primary">
+                            <i class="material-icons">share</i>
+                        </a>
+                        <a href="#!" onclick="compartilharComprovante()" class="btn-floating mobile-fab-tip">Compartilhar</a>
+                    </li>
+                    <li>
+                        <a href="#!" onclick="cancelarAposta()" class="btn-floating primary modal-trigger">
+                            <i class="material-icons">delete</i>
+                        </a>
+                        <a href="#!" onclick="cancelarAposta()" class="btn-floating mobile-fab-tip modal-trigger">Excluir</a>
+                    </li>
+                </ul>
             </div>
 
-            <div id="footer">
+            <!-- <div id="footer">
                 <div id="fab" class="fixed-action-btn">
-                    <a onclick="app.openModal()" class="btn-floating btn-large waves-effect waves-light scm-secondary">
+                    <a onclick="app.openModal()" class="btn-floating btn-large waves-effect waves-light secondary">
                         <i class="large material-icons">add</i>
                     </a>
                 </div>
-            </div>
+            </div> -->
 
+            <!-- Modal Form -->
             <div id="modal">
                 <div id="addItemModal" class="modal modal-fixed-footer fullscreen-modal">
                     <div class="modal-header">

@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/var/www/html/projetos/atlanteti/applist/platforms/android/app/build/intermediates/res/merged/debug/values_values.arsc.flat",
+            "outputFile": "D:\\Trabalho\\Desenvolvimento\\atlanteti\\applist\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\values_values.arsc.flat",
             "map": [
                 {
-                    "source": "/var/www/html/projetos/atlanteti/applist/platforms/android/app/src/main/res/values/strings.xml",
+                    "source": "D:\\Trabalho\\Desenvolvimento\\atlanteti\\applist\\platforms\\android\\app\\src\\main\\res\\values\\strings.xml",
                     "from": {
                         "startLines": "4,2,3",
                         "startColumns": "4,4,4",
