@@ -33,7 +33,6 @@ var index = {
         document.addEventListener('resume', onResume, false);
 
         function onResume() {
-            //alert('onResume!');
         }
     }
 };

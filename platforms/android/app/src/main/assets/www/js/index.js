@@ -28,12 +28,13 @@ var index = {
     // 'pause', 'resume', etc.
     onDeviceReady: function() {
         this.receivedEvent('deviceready');
+        app.syncItems();
     },
     receivedEvent: function(id) {
         document.addEventListener('resume', onResume, false);
 
         function onResume() {
-            //alert('onResume!');
+            app.syncItems();
         }
     }
 };

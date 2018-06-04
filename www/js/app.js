@@ -67,6 +67,8 @@ var app = {
 
         $('#addItemModal').modal();
         $('#addItemModal').modal('open');
+
+        $('#tipo').prop('selectedIndex', 0);
     },
 
     closeModal: function () {
@@ -83,12 +85,18 @@ var app = {
         this.storeItem(item);
     },
 
-    deleteItem: function (key = null) {
-        this.toast('Selecione, pelo menos, um item para excluir.');
+    clearItems: function () {
+        if(typeof localStorage.itemList != 'undefined') {
+            localStorage.clear();
+            this.loadItemList();
+            this.toast('Os ítens cadastrados foram removidos com sucesso.');
+        } else {
+            this.toast('Não há nenhum ítem cadastrado.');
+        }
     },
 
-    shareItem: function (key = null) {
-        this.toast('Selecione, pelo menos, um item para compartilhar.');
+    syncItems: function () {
+        this.toast('The item list is being synchronized right now...');
     },
 
     storeItem: function (item) {
@@ -114,8 +122,6 @@ var app = {
             itemList = JSON.stringify(itemList);
             localStorage.itemList = itemList;
         }
-
-        $('#fab').removeClass('active');
         this.closeModal();
         this.loadItemList();
     },
@@ -191,5 +197,5 @@ var app = {
         }
 
         return returnArray;
-    },
+    }
 }
