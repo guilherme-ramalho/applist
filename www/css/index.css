@@ -88,6 +88,10 @@
     font-size: .9rem !important;
 }
 
+th, td {
+    font-size: .9rem !important;
+}
+
 .modal-footer {
     z-index: 2000;
 }

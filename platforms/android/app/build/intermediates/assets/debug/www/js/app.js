@@ -1,10 +1,9 @@
 var app = {
-
-    loadBar: function () {
+    loadBar: function() {
         $('#navbar').load('./views/navbar.html');
     },
 
-    loadItemList: function () {
+    loadItemList: function() {
         let itemList = localStorage.itemList;
         let content = $('#content');
 
@@ -13,11 +12,12 @@ var app = {
         //Creates the list item element if It is defined
         if (typeof itemList != 'undefined') {
             let str = '';
+            let strTable = '';
             itemList = JSON.parse(itemList);
 
             content.html('<ul id="itemList" class="collection"></ul>');
 
-            $.each(itemList, function (key, item) {
+            $.each(itemList, function(key, item) {
                 console.log(item);
                 str +=
                     '<li id="item' + key + '" class="collection-item">\
@@ -27,8 +27,28 @@ var app = {
                             <span class="medium-text">'+ item.tipo + '</span>\
                             <div class="right">\
                                 <b class="medium-text">Criado:</b>\
-                                <span class="medium-text">'+ item.createdAt + '</span>\
+                                <span class="medium-text">'+ item.criado + '</span>\
                             </div>\
+                            <table>\
+                                <thead>\
+                                    <tr>\
+                                        <th>Patrimônio</th>\
+                                        <th>Marca</th>\
+                                        <th>Modelo</th>\
+                                        <th>Serial</th>\
+                                        <th>Serial/HD</th>\
+                                    </tr>\
+                                    </thead>\
+                                    <tbody>\
+                                    <tr>\
+                                        <td>'+ (item.patrimonio != "" ? item.patrimonio : "---") +'</td>\
+                                        <td>'+ (item.marca != "" ? item.marca : "---") +'</td>\
+                                        <td>'+ (item.modeloPn != "" ? item.modeloPn : "---") +'</td>\
+                                        <td>'+ (item.serial != "" ? item.serial : "---") +'</td>\
+                                        <td>'+ (item.serialHd != "" ? item.serialHd : "---") +'</td>\
+                                    </tr>\
+                                </tbody>\
+                            </table>\
                         </div>\
                     </p>\
                 </li>';
@@ -40,34 +60,66 @@ var app = {
         }
     },
 
-    openModal: function () {
+    openModal: function() {
         $('#itemForm').trigger('reset');
 
         $('#addItemModal').modal();
         $('#addItemModal').modal('open');
     },
 
-    closeModal: function () {
+    closeModal: function() {
         $('#itemForm').trigger('reset');
 
         $('#addItemModal').modal();
         $('#addItemModal').modal('close');
     },
 
-    saveItem: function () {
+    saveItem: function() {
         let item = $('#itemForm').serializeArray();
         item = this.objectfyForm(item);
 
         this.storeItem(item);
     },
 
-    selectListener: function () {
+    deleteItem: function(key = null) {
+        this.toast('Selecione, pelo menos, um item para excluir.');
+    },
+
+    shareItem: function(key = null) {
+        this.toast('Selecione, pelo menos, um item para compartilhar.');
+    },
+
+    storeItem: function(item) {
+        let itemList = localStorage.itemList;
+        let currentDateTime = moment().locale('pt-br').format('DD/MM/YYYY H:mm');
+
+        item.criado = currentDateTime
+        item.transmitido = 0;
+
+        if (typeof itemList == 'undefined') {//Local storage isn't defined yet
+            let itemObj = [item];
+
+            localStorage.setItem('itemList', JSON.stringify(itemObj));
+        } else {//Pushes the item into an existing storage list
+            itemList = JSON.parse(itemList);
+            console.log(itemList);
+            itemList.push(item);
+            itemList = JSON.stringify(itemList);
+            localStorage.itemList = itemList;
+        }
+
+        $('#fab').removeClass('active');
+        this.closeModal();
+        this.loadItemList();
+    },
+
+    selectListener: function() {
         $('#tipo').change(function () {
             let tipo = $('#tipo').val();
 
             let inputs = $('#itemForm>div.row>div.input-field');
 
-            inputs.each(function () {
+            inputs.each(function() {
                 $(this).show();
             });
 
@@ -96,11 +148,11 @@ var app = {
         });
     },
 
-    toast: function (msg) {
+    toast: function(msg) {
         Materialize.toast(msg, 4000);
     },
 
-    objectfyForm: function (formArray) {
+    objectfyForm: function(formArray) {
         let returnArray = {};
 
         for (let i = 0; i < formArray.length; i++) {
@@ -109,26 +161,4 @@ var app = {
 
         return returnArray;
     },
-
-    storeItem: function (item) {
-        let itemList = localStorage.itemList;
-        let currentDateTime = moment().locale('pt-br').format('DD/MM/YYYY H:mm');
-
-        item.createdAt = currentDateTime
-
-        if (typeof itemList == 'undefined') {//Local storage isn't defined yet
-            let itemObj = [item];
-
-            localStorage.setItem('itemList', JSON.stringify(itemObj));
-        } else {//Pushes the item into an existing storage list
-            itemList = JSON.parse(itemList);
-            console.log(itemList);
-            itemList.push(item);
-            itemList = JSON.stringify(itemList);
-            localStorage.itemList = itemList;
-        }
-
-        this.closeModal();
-        this.loadItemList();
-    }
 }
