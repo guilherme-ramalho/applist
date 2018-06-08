@@ -14,6 +14,7 @@ var app = {
             let str = '';
             let strTable = '';
             itemList = JSON.parse(itemList);
+            itemList = this.sortArrayByKey(itemList, 'transmitido');
 
             content.html('<ul id="itemList" class="collection"></ul>');
 
@@ -110,26 +111,16 @@ var app = {
                     //Saves the new list on the local storage
                     localStorage.itemList = JSON.stringify(itemList);
                     app.loadItemList();
+                } else {
+                    app.toast('Ocorreu algum problema ao transmitir o item de patrimônio ' + item.patrimonio);
                 }
             });
         });
+
+        this.toast('Itens sendo transmitidos...');
     },
 
     objectToApiJSon: function (item) {
-        // let obj = JSON.stringify(
-        //     {
-        //         Item: {
-        //             DataHora: item.criado,
-        //             Marca: item.marca,
-        //             Modelo: item.modeloPn,
-        //             Patrimonio: item.patrimonio,
-        //             Serial: item.serial,
-        //             SerialHd: item.serialHd,
-        //             Tipo: item.tipo
-        //         }
-        //     }
-        // );
-
         return {
             Item: {
                 DataHora: item.criado,
@@ -264,7 +255,7 @@ var app = {
         return returnArray;
     },
 
-    sortByKey: function (array, key) {
+    sortArrayByKey: function (array, key) {
         return array.sort(function(a, b) {
             var x = a[key]; var y = b[key];
             return ((x < y) ? -1 : ((x > y) ? 1 : 0));
