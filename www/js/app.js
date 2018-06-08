@@ -100,15 +100,20 @@ var app = {
     },
 
     storeItem: function (item) {
-        if(!this.validateForm()) {
-            this.toast('Ops! Algo deu errado. Por favor, verifique os campos e tente novamente.');
+        if(!this.validateForm()) {//Checks if the form is valid
+            this.toast('Ops! Algo deu errado. Por favor, verifique os campos.');
+            return false;
+        }
+
+        if(!this.validatePatrimony(item.patrimonio)) {//Checks if the patrimony is already stored
+            this.toast('O patrimônio informado já está cadastrado.');
             return false;
         }
 
         let itemList = localStorage.itemList;
         let currentDateTime = moment().locale('pt-br').format('DD/MM/YYYY H:mm');
 
-        item.criado = currentDateTime
+        item.criado = currentDateTime;
         item.transmitido = 0;
 
         if (typeof itemList == 'undefined') {//Local storage isn't defined yet
@@ -126,6 +131,22 @@ var app = {
         this.loadItemList();
     },
 
+    validatePatrimony: function (patrimony) {
+        let isValid = true;
+
+        if(typeof localStorage.itemList != 'undefined') {
+            let itemList = JSON.parse(localStorage.itemList);
+
+            $.each(itemList, function(key, item) {
+                if(patrimony == item.patrimonio) {
+                    isValid = false;
+                }
+            });
+        }
+
+        return isValid;
+    },
+
     validateForm: function () {
         let inputs = $('#itemForm>div.row>div.input-field>input');
         let isValid = true;
@@ -133,7 +154,7 @@ var app = {
         inputs.each(function () {
             let element = $(this);
 
-            //Se o elemento é requerido e não tem valor
+            //If the input is required and has no value
             if(typeof element.attr('required') != typeof undefined && element.val() == '') {
                 element.addClass('invalid');
                 isValid = false;
@@ -197,5 +218,9 @@ var app = {
         }
 
         return returnArray;
+    },
+
+    ajaxRequest: function () {
+        
     }
 }
