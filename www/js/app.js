@@ -29,7 +29,7 @@ var app = {
                                 <span class="medium-text">'+ item.tipo + '</span>\
                                 <div class="right">\
                                     <b class="medium-text">Status:</b>\
-                                    <span class="'+status+' badge medium-text white-text">'+statusMessage+'</span><br/>\
+                                    <span class="'+ status + ' badge medium-text white-text">' + statusMessage + '</span><br/>\
                                 </div>\
                                 <table>\
                                     <thead>\
@@ -98,7 +98,49 @@ var app = {
     syncItems: function () {
         let itemList = JSON.parse(localStorage.itemList);
 
-        console.log(itemList);
+        $.each(itemList, function (key, item) {
+            let itemObj = app.objectToApiJSon(item);
+
+            let request = app.ajaxRequest('POST', 'Inserir', itemObj);
+
+            request.done(function (response) {
+                if(response.Result == true) {
+                    itemList[key].transmitido = 1;
+
+                    //Saves the new list on the local storage
+                    localStorage.itemList = JSON.stringify(itemList);
+                    app.loadItemList();
+                }
+            });
+        });
+    },
+
+    objectToApiJSon: function (item) {
+        // let obj = JSON.stringify(
+        //     {
+        //         Item: {
+        //             DataHora: item.criado,
+        //             Marca: item.marca,
+        //             Modelo: item.modeloPn,
+        //             Patrimonio: item.patrimonio,
+        //             Serial: item.serial,
+        //             SerialHd: item.serialHd,
+        //             Tipo: item.tipo
+        //         }
+        //     }
+        // );
+
+        return {
+            Item: {
+                DataHora: item.criado,
+                Marca: item.marca,
+                Modelo: item.modeloPn,
+                Patrimonio: item.patrimonio,
+                Serial: item.serial,
+                SerialHd: item.serialHd,
+                Tipo: item.tipo
+            }
+        };
     },
 
     storeItem: function (item) {
@@ -222,23 +264,28 @@ var app = {
         return returnArray;
     },
 
-    ajaxRequest: function (verb, endpoint, headers = null, body = null, async = true) {
+    sortByKey: function (array, key) {
+        return array.sort(function(a, b) {
+            var x = a[key]; var y = b[key];
+            return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+        });
+    },
+
+    ajaxRequest: function (verb, endpoint, body = null, async = true) {
         try {
             return $.ajax({
                 ContentType: 'application/json',
-                url: 'http://api.soccerama.com.br/' + endpoint,
+                url: 'http://inventario.atlanteti.com/AtlanteInventarioService/AtlanteInventarioService.svc/' + endpoint,
                 type: verb,
+                dataType: 'json',
                 async: async,
-                data: body,
+                headers: {
+                    'Access-Control-Allow-Origin': '*',
+                    'Content-Type': 'application/json'
+                },
+                data: JSON.stringify(body),
                 error: function (error) {
                     console.log(error);
-                },
-                beforeSend: function (xhr) {
-                    if (headers !== null) {
-                        for (var key in headers) {
-                            xhr.setRequestHeader(key, headers[key]);
-                        }
-                    }
                 }
             });
         } catch (error) {
