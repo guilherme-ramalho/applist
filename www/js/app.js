@@ -9,7 +9,7 @@ var app = {
 
         content.empty();
 
-        //Creates the list item element if It is defined
+        //Creates the list item element if It is undefined
         if (typeof itemList != 'undefined') {
             let str = '';
             let strTable = '';
@@ -18,17 +18,18 @@ var app = {
             content.html('<ul id="itemList" class="collection"></ul>');
 
             $.each(itemList, function (key, item) {
-                if (item.transmitido == 0) {
-                    console.log(item);
-                    str +=
-                        '<li id="item' + key + '" class="collection-item">\
+                let status = item.transmitido == 1 ? 'green' : 'grey darken-4';
+                let statusMessage = item.transmitido == 1 ? 'Transmitido' : 'Aguardando';
+
+                str +=
+                    '<li id="item' + key + '" class="collection-item">\
                         <p>\
                             <div class="sol s12">\
                                 <b class="medium-text">Tipo:</b>\
                                 <span class="medium-text">'+ item.tipo + '</span>\
                                 <div class="right">\
-                                    <b class="medium-text">Criado:</b>\
-                                    <span class="medium-text">'+ item.criado + '</span>\
+                                    <b class="medium-text">Status:</b>\
+                                    <span class="'+status+' badge medium-text white-text">'+statusMessage+'</span><br/>\
                                 </div>\
                                 <table>\
                                     <thead>\
@@ -53,7 +54,6 @@ var app = {
                             </div>\
                         </p>\
                     </li>';
-                }
             });
 
             $('#itemList').html(str);
@@ -86,7 +86,7 @@ var app = {
     },
 
     clearItems: function () {
-        if(typeof localStorage.itemList != 'undefined') {
+        if (typeof localStorage.itemList != 'undefined') {
             localStorage.clear();
             this.loadItemList();
             this.toast('Os ítens cadastrados foram removidos com sucesso.');
@@ -96,16 +96,18 @@ var app = {
     },
 
     syncItems: function () {
-        this.toast('The item list is being synchronized right now...');
+        let itemList = JSON.parse(localStorage.itemList);
+
+        console.log(itemList);
     },
 
     storeItem: function (item) {
-        if(!this.validateForm()) {//Checks if the form is valid
+        if (!this.validateForm()) {//Checks if the form is valid
             this.toast('Ops! Algo deu errado. Por favor, verifique os campos.');
             return false;
         }
 
-        if(!this.validatePatrimony(item.patrimonio)) {//Checks if the patrimony is already stored
+        if (!this.validatePatrimony(item.patrimonio)) {//Checks if the patrimony is already stored
             this.toast('O patrimônio informado já está cadastrado.');
             return false;
         }
@@ -134,11 +136,11 @@ var app = {
     validatePatrimony: function (patrimony) {
         let isValid = true;
 
-        if(typeof localStorage.itemList != 'undefined') {
+        if (typeof localStorage.itemList != 'undefined') {
             let itemList = JSON.parse(localStorage.itemList);
 
-            $.each(itemList, function(key, item) {
-                if(patrimony == item.patrimonio) {
+            $.each(itemList, function (key, item) {
+                if (patrimony == item.patrimonio) {
                     isValid = false;
                 }
             });
@@ -155,7 +157,7 @@ var app = {
             let element = $(this);
 
             //If the input is required and has no value
-            if(typeof element.attr('required') != typeof undefined && element.val() == '') {
+            if (typeof element.attr('required') != typeof undefined && element.val() == '') {
                 element.addClass('invalid');
                 isValid = false;
             }
@@ -220,7 +222,27 @@ var app = {
         return returnArray;
     },
 
-    ajaxRequest: function () {
-        
+    ajaxRequest: function (verb, endpoint, headers = null, body = null, async = true) {
+        try {
+            return $.ajax({
+                ContentType: 'application/json',
+                url: 'http://api.soccerama.com.br/' + endpoint,
+                type: verb,
+                async: async,
+                data: body,
+                error: function (error) {
+                    console.log(error);
+                },
+                beforeSend: function (xhr) {
+                    if (headers !== null) {
+                        for (var key in headers) {
+                            xhr.setRequestHeader(key, headers[key]);
+                        }
+                    }
+                }
+            });
+        } catch (error) {
+            console.log(error);
+        }
     }
 }
