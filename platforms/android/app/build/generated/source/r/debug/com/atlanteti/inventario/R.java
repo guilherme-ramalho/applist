@@ -5,7 +5,7 @@
  * should not be modified by hand.
  */
 
-package com.atlanteti.applist;
+package com.atlanteti.inventario;
 
 public final class R {
   public static final class drawable {

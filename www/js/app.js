@@ -23,35 +23,25 @@ var app = {
                 let statusMessage = item.transmitido == 1 ? 'Transmitido' : 'Aguardando';
 
                 str +=
-                    '<li id="item' + key + '" class="collection-item">\
+                    '<li onclick="app.expandItemModal(event)" data-item="' + encodeURI(JSON.stringify(item)) + '" id="item' + key + '" class="collection-item">\
                         <p>\
                             <div class="sol s12">\
                                 <b class="medium-text">Tipo:</b>\
                                 <span class="medium-text">'+ item.tipo + '</span>\
                                 <div class="right">\
-                                    <b class="medium-text">Status:</b>\
-                                    <span class="'+ status + ' badge medium-text white-text">' + statusMessage + '</span><br/>\
+                                    <b class="medium-text">Marca:</b>\
+                                    <span class="medium-text">'+ item.marca + '</span>\<br/>\
                                 </div>\
-                                <table>\
-                                    <thead>\
-                                        <tr>\
-                                            <th>Patrimônio</th>\
-                                            <th>Marca</th>\
-                                            <th>Modelo</th>\
-                                            <th>Serial</th>\
-                                            <th>Serial/HD</th>\
-                                        </tr>\
-                                        </thead>\
-                                        <tbody>\
-                                        <tr>\
-                                            <td>'+ (item.patrimonio != "" ? item.patrimonio : "---") + '</td>\
-                                            <td>'+ (item.marca != "" ? item.marca : "---") + '</td>\
-                                            <td>'+ (item.modeloPn != "" ? item.modeloPn : "---") + '</td>\
-                                            <td>'+ (item.serial != "" ? item.serial : "---") + '</td>\
-                                            <td>'+ (item.serialHd != "" ? item.serialHd : "---") + '</td>\
-                                        </tr>\
-                                    </tbody>\
-                                </table>\
+                            </div>\
+                        </p>\
+                        <p>\
+                            <div class="sol s12">\
+                                <b class="medium-text">Patrimônio:</b>\
+                                <span class="medium-text">'+ item.patrimonio + '</span>\
+                                <div class="right">\
+                                    <b class="medium-text">Status:</b>\
+                                    <span class="'+ status + ' badge medium-text white-text">' + statusMessage + '</span>\
+                                </div>\
                             </div>\
                         </p>\
                     </li>';
@@ -77,6 +67,30 @@ var app = {
 
         $('#addItemModal').modal();
         $('#addItemModal').modal('close');
+    },
+
+    expandItemModal: function (event) {
+        let item = $(event.target).closest('li').data('item');
+        item = decodeURI(item);
+        item = JSON.parse(item);
+
+        $('#itemModalTitle').text('Item de Patrimônio ' + item.patrimonio);
+
+        $('#itemModalBody').empty();
+
+        $.each(item, function(key, val) {
+            if(val != '' && key != 'transmitido') {
+                $('#itemModalBody').append(
+                    '<div class="input-field col s6">\
+                        <input id="'+ key +'" name="'+ key +'" value="'+ val +'" type="text">\
+                        <label for="'+ key +'">'+ key +'</label>\
+                    </div>'
+                );
+            }
+        });
+
+        $('#itemModal').modal();
+        $('#itemModal').modal('open');
     },
 
     saveItem: function () {

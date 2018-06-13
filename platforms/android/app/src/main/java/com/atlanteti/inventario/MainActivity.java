@@ -17,7 +17,7 @@
        under the License.
  */
 
-package com.atlanteti.applist;
+package com.atlanteti.inventario;
 
 import android.os.Bundle;
 import org.apache.cordova.*;

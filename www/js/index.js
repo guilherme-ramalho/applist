@@ -28,11 +28,18 @@ var index = {
     // 'pause', 'resume', etc.
     onDeviceReady: function() {
         this.receivedEvent('deviceready');
+        app.syncItems();
     },
     receivedEvent: function(id) {
         document.addEventListener('resume', onResume, false);
+        // document.addEventListener('offline', onOffline, false);
+
+        // function onOffline() {
+        //     alert('Device is offline!');
+        // }
 
         function onResume() {
+            app.syncItems();
         }
     }
 };

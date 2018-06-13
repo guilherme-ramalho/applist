@@ -16,14 +16,6 @@
         "source": "D:\\Trabalho\\Desenvolvimento\\atlanteti\\applist\\platforms\\android\\app\\src\\main\\res\\drawable-land-xxxhdpi\\screen.png"
     },
     {
-        "merged": "D:\\Trabalho\\Desenvolvimento\\atlanteti\\applist\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi_icon.png.flat",
-        "source": "D:\\Trabalho\\Desenvolvimento\\atlanteti\\applist\\platforms\\android\\app\\src\\main\\res\\mipmap-xxxhdpi\\icon.png"
-    },
-    {
-        "merged": "D:\\Trabalho\\Desenvolvimento\\atlanteti\\applist\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi_icon.png.flat",
-        "source": "D:\\Trabalho\\Desenvolvimento\\atlanteti\\applist\\platforms\\android\\app\\src\\main\\res\\mipmap-xxhdpi\\icon.png"
-    },
-    {
         "merged": "D:\\Trabalho\\Desenvolvimento\\atlanteti\\applist\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi_icon.png.flat",
         "source": "D:\\Trabalho\\Desenvolvimento\\atlanteti\\applist\\platforms\\android\\app\\src\\main\\res\\mipmap-hdpi\\icon.png"
     },

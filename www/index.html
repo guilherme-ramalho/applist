@@ -66,6 +66,10 @@
                                             <option value="Leitor Cód. de Barras">Leitor Cód. de Barras</option>
                                         </select>
                                     </div>
+                                    <div class="input-field col s12">
+                                        <input id="endereco" name="endereco" type="text">
+                                        <label for="endereco">Endereço</label>
+                                    </div>
                                     <div class="input-field col s6">
                                         <input id="patrimonio" name="patrimonio" type="text" required class="validate">
                                         <label for="patrimonio">Patrimônio</label>
@@ -94,6 +98,21 @@
                     <div class="modal-footer">
                         <a href="#!" class="modal-action modal-close waves-effect waves-blue btn-flat ">Voltar</a>
                         <a href="#!" class="waves-effect waves-light btn-flat primary white-text" onclick="app.saveItem()">Salvar</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Item -->
+            <div id="modal">
+                <div id="itemModal" class="modal modal-fixed-footer fullscreen-modal">
+                    <div id="itemModalTitle" class="modal-header"></div>
+
+                    <div class="modal-content scm-resumo-content">
+                        <div id="itemModalBody" class="row"></div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <a href="#!" class="modal-action modal-close waves-effect waves-light btn-flat primary white-text">Voltar</a>
                     </div>
                 </div>
             </div>
