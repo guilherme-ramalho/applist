@@ -83,7 +83,7 @@ var app = {
                 $('#itemModalBody').append(
                     '<div class="input-field col s6">\
                         <input id="'+ key +'" name="'+ key +'" value="'+ val +'" type="text">\
-                        <label for="'+ key +'">'+ key +'</label>\
+                        <label for="'+ key +'" class="active">'+ key +'</label>\
                     </div>'
                 );
             }

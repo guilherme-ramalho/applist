@@ -28,12 +28,17 @@ var index = {
     // 'pause', 'resume', etc.
     onDeviceReady: function() {
         this.receivedEvent('deviceready');
-        app.syncItems();
+
+        var networkStatus = navigator.connection.type;
+
+        if(networkStatus != Connection.UNKNOWN) {
+            app.syncItems();
+        }
     },
     receivedEvent: function(id) {
-        document.addEventListener('resume', onResume, false);
+        document.addEventListener('online', onOnline, false);
 
-        function onResume() {
+        function onOnline() {
             app.syncItems();
         }
     }

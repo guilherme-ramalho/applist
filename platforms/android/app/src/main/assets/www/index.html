@@ -102,6 +102,21 @@
                 </div>
             </div>
 
+            <!-- Modal Item -->
+            <div id="modal">
+                <div id="itemModal" class="modal modal-fixed-footer fullscreen-modal">
+                    <div id="itemModalTitle" class="modal-header"></div>
+
+                    <div class="modal-content scm-resumo-content">
+                        <div id="itemModalBody" class="row"></div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <a href="#!" class="modal-action modal-close waves-effect waves-light btn-flat primary white-text">Voltar</a>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 
@@ -117,6 +132,7 @@
             app.loadItemList();
             app.selectListener();
             $('select').material_select();
+            Materialize.updateTextFields();
         });
     </script>
 </body>
