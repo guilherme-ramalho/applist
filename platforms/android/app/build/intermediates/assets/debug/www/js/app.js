@@ -143,7 +143,8 @@ var app = {
                 Patrimonio: item.patrimonio,
                 Serial: item.serial,
                 SerialHd: item.serialHd,
-                Tipo: item.tipo
+                Tipo: item.tipo,
+                Endereco: item.endereco
             }
         };
     },
